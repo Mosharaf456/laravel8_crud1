@@ -16,7 +16,7 @@ class CountriesController extends Controller
     }
 
        // form data value insertion process to database
-    public function store( Request $request)
+    public function saveToDatabase( Request $request)
     {
         // database column name below
         // name,capital,currency,population
@@ -87,17 +87,17 @@ class CountriesController extends Controller
         $country = Country::find($id);
         return view('country.detail',compact('country'));
     }
-    // public function edit($id)
-    // {
-    //     $country = Country::find($id);
-    //     return view('country.edit',compact('country'));
-    // }
-
-    // simple way
-    public function edit(Country $country) //Route model binding
+    public function edit($id)
     {
+        $country = Country::find($id);
         return view('country.edit',compact('country'));
     }
+
+    // simple way
+    // public function edit(Country $country) //Route model binding
+    // {
+    //     return view('country.edit',compact('country'));
+    // }
 
     public function update($id)
     {
@@ -132,7 +132,7 @@ class CountriesController extends Controller
     {
         $country = Country::find($id);
         $country->delete();
-        
+
         return back();
     }
 

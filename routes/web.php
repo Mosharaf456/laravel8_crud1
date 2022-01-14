@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*Route works top to bottom and left to right */
+/*
+route top priority
+Route works top to bottom and left to right */
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,9 +25,9 @@ Route::get('/countries','CountriesController@showAllCountry');
 
 Route::get('/countries/create','CountriesController@create');
 /*insert*/
-Route::post('/countries/create','CountriesController@store');
-/*/
-Route::get('/countries/{id}','CountriesController@showCountryDetail');
+Route::post('/countries/create','CountriesController@saveToDatabase');
+/* */
+Route::get('/countries/{id}','CountriesController@showCountryDetail')->where(['id' => '[0-9]+']);
 
 Route::get('/countries/{country}/edit','CountriesController@edit'); 
 
