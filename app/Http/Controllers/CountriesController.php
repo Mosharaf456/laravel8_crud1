@@ -99,4 +99,41 @@ class CountriesController extends Controller
         return view('country.edit',compact('country'));
     }
 
+    public function update($id)
+    {
+        $country = Country::find($id);
+
+        $name = request('name');
+        $capital = request('capital');
+        $currency = request('currency');
+        $population = request('population');
+
+        //1st way exiting value into database
+        // $country->name = $name;
+        // $country->capital = $capital;
+        // $country->currency = $currency;
+        // $country->population = $population;
+        // now just save
+        // $country->save();
+
+        // 2nd way
+        $country->update([
+            'name' => $name,
+            'capital' => $capital,
+            'currency' => $currency,
+            'population' => $population
+        ]);
+        
+        return redirect('/countries');
+
+        // return back();
+    }
+    public function destroy($id)
+    {
+        $country = Country::find($id);
+        $country->delete();
+        
+        return back();
+    }
+
 }

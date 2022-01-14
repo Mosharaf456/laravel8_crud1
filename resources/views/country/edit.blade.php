@@ -12,9 +12,9 @@
 <body>
     <div class="container">
         <h1>Edit Country</h1>
-        <form action="/countries/create" method= "POST" >
+        <form action="/countries/{{$country->id}}/edit" method="POST" >
             @csrf
-
+            @method('patch')
             <div class="form-group">
                 <label for="">Country Name</label>
                 <input type="text" name="name" class="form-control" value={{$country->name}} >

@@ -38,8 +38,16 @@
                        <td> {{ $v->currency }} </td>
                        <td> {{ $v->population }} </td>
                        <td> {{ $v->created_at->diffForHumans() }} </td>
-                       <td> {{ $v->updated_at->format(' y - m - d ') }} </td>
-                       <td><a href="/countries/{{$v->id}}/edit" class="btn btn-success btn-sm">Edit</a> | <a href="#" class="btn btn-danger btn-sm">Delete</a> </td>
+                       <td> {{ $v->updated_at->format('y - m - d') }} </td>
+                       <td>
+                        <a href="/countries/{{$v->id}}/edit" class="btn btn-success btn-sm">Edit</a> | 
+                        <form action="/countries/{{$v->id}}/delete" method="POST">
+                            {{--cross site request forjery ;;another doesn,t  interfare --}}
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                       </td>
                    </tr>
                 @endforeach
             </tbody>
