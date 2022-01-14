@@ -16,7 +16,7 @@ class CountriesController extends Controller
     }
 
        // form data value insertion process to database
-    public function store()
+    public function store( Request $request)
     {
         // database column name below
         // name,capital,currency,population
@@ -28,10 +28,17 @@ class CountriesController extends Controller
         // $population = request('population');
 
         //  take data from your form 2nd way
-        $name = request()->input('name');
-        $capital = request()->input('capital');
-        $currency = request()->input('currency');
-        $population = request()->input('population');
+        // $name = request()->input('name');
+        // $capital = request()->input('capital');
+        // $currency = request()->input('currency');
+        // $population = request()->input('population');
+
+          //  take data from your form 3rd way 
+        //   dependency injetion using object
+        // $name = $request->input('name');
+        // $capital = $request->input('capital');
+        // $currency = $request->input('currency');
+        // $population = $request->input('population');
 
         // 1st approach
         // value insertion process,, Model class Static built-in method call to store data to database
@@ -45,15 +52,26 @@ class CountriesController extends Controller
         // 
 
         // 2nd approach
-        $country = new Country();
-        $country->name = $name;
-        $country->capital = $capital;
-        $country->currency = $currency;
-        $country->population = $population;
+        // $country = new Country();
+        // $country->name = $name;
+        // $country->capital = $capital;
+        // $country->currency = $currency;
+        // $country->population = $population;
 
-        $country->save();
+        // $country->save();
 
-        return back();
+        // 3rd approch to save data into data base
+        // Country::create( $request->all() );
+
+        // 4th approach
+        Country::create( $request->only('name','capital','currency','population') );
+        
+        // 5th approach
+        // Country::create( $request->except('_token') );
+        // return $request->except('name');
+
+        // return back();
+        return redirect('/countries');
     }
 
     public function showAllCountry()
@@ -61,4 +79,24 @@ class CountriesController extends Controller
         $countries = Country::all();
         return view('country.showAllCountry' ,compact('countries'));
     }
+    public function showCountryDetail($id)
+    {
+        // $country = Country::where('id', '=', $id)->first() ;//"select * from countries where id = $id";
+        $country = Country::where('id',  $id)->first() ;
+        // only primary key applicable on find method
+        $country = Country::find($id);
+        return view('country.detail',compact('country'));
+    }
+    // public function edit($id)
+    // {
+    //     $country = Country::find($id);
+    //     return view('country.edit',compact('country'));
+    // }
+
+    // simple way
+    public function edit(Country $country) //Route model binding
+    {
+        return view('country.edit',compact('country'));
+    }
+
 }

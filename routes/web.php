@@ -24,3 +24,8 @@ Route::get('/countries','CountriesController@showAllCountry');
 Route::get('/countries/create','CountriesController@create');
 
 Route::post('/countries/create','CountriesController@store');
+
+Route::get('/countries/{id}','CountriesController@showCountryDetail');
+
+Route::get('/countries/{country}/edit','CountriesController@edit'); 
+
