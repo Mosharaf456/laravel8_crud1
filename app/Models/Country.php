@@ -17,4 +17,9 @@ class Country extends Model
     // 4th approach
     protected $fillable = ['name','capital','currency','population'];
 
+    public function persons()
+    {
+        return $this->hasMany('App\Models\person');
+    }
+
 }

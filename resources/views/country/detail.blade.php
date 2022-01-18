@@ -21,14 +21,14 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    
+
                     <th>Created on</th>
                     <th>Updated on</th>
                   
                 </tr>
             </thead>
             <tbody>
-                @foreach ($country_person as $person)
+                @foreach ($country->persons as $person)
                    <tr>
                        <td> {{ $person->id }} </td>
                        <td> {{ $person->name }} </td>

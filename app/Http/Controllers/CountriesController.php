@@ -88,9 +88,10 @@ class CountriesController extends Controller
         // only primary key applicable on find method
         $country = Country::find($id);
 
-        $country_person =Person::where('country_id' ,$country->id )->get();
+        // $country_person =Person::where('country_id' ,$country->id )->get();
         
-        return view('country.detail',compact('country' , 'country_person'));
+        // return view('country.detail',compact('country' , 'country_person'));
+        return view('country.detail',compact('country'));
     }
     public function edit($id)
     {
