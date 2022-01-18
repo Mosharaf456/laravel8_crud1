@@ -41,4 +41,14 @@ delete
 */
 Route::delete('/countries/{id}/delete','CountriesController@destroy'); 
 
+//Person controller__route
+Route::get('/persons','PersonsController@index'); 
+// create person
+Route::get('/persons/create','PersonsController@create'); 
+/*insert*/
+Route::post('/persons/create','PersonsController@store');
+//
+
+
+
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 // error solve:: import Country class
 use App\Models\Country;
+use App\Models\Person;
 
 class CountriesController extends Controller
 {
@@ -82,10 +83,14 @@ class CountriesController extends Controller
     public function showCountryDetail($id)
     {
         // $country = Country::where('id', '=', $id)->first() ;//"select * from countries where id = $id";
-        $country = Country::where('id',  $id)->first() ;
+        // $country = Country::where('id',  $id)->first() ;
+
         // only primary key applicable on find method
         $country = Country::find($id);
-        return view('country.detail',compact('country'));
+
+        $country_person =Person::where('country_id' ,$country->id )->get();
+        
+        return view('country.detail',compact('country' , 'country_person'));
     }
     public function edit($id)
     {
