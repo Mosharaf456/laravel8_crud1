@@ -18,7 +18,14 @@ class CreatePeopleTable extends Migration
             $table->string('name',100);
             $table->string('email',150)->unique();
             $table->string('phone');
+            $table->unsignedBigInteger('country_id');
             $table->timestamps();
+
+            $table->foreign('country_id')
+            ->references('id')
+            ->on('countries')
+            ->onDelete('cascade');
+            
         });
     }
 
